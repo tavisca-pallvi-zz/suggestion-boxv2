@@ -5,14 +5,17 @@ function cleara() {
     document.getElementById("main").value = '';
     document.getElementById("cross").style.visibility = 'hidden';
 }
-
-var arrow = null, prevevent = 0, f = 0;
+var arrow = null;
+var count = null;
+var countup = null;
 function search(event) {
-  if (event.which === 38 || event.which === 40 || event.which === 13) {
+    if (event.which === 38 || event.which === 40 || event.which === 13) {
         keyChange(event);
-
     }
     else {
+        arrow = null;
+        countup = null;
+        count = null;
         var ll = document.getElementById("main");
 
         document.getElementById("cross").style.visibility = 'visible';
@@ -69,44 +72,75 @@ function search(event) {
         }
 
     }
+    //var lists = document.getelementsbytagname("li");
+    //lists[0].setattribute("class", "sel");
+    //arrow = 0;
 }
 
-function keyChange (event) {
-    //console.log(event.which)
-        console.log(1);
-        var listitem = document.getElementsByTagName("LI");//getting all the list tags
-        console.log(event);
-        if (event.which === 40) {
-            if (arrow === null) {
-                listitem[0].setAttribute("class", "sel");
-                arrow = 0;
-            }
-            else {
-                listitem[arrow].setAttribute("class", "list-items");
-                arrow++;
-                listitem[arrow].setAttribute("class", "sel");
+function keyChange(event) {
+    debugger;
+  
+    var listitem = document.getElementsByTagName("LI");//getting all the list tags
+    var len = listitem.length - 1;
+    var countup = 5;
 
-                console.log(arrow);
-            }
-            //if (listitem.length > 5) {
-            //    document.getElementById("ulist").scrollBy(0, 20);
-            //}
-        }
-        else if (event.which === 38) {
-            listitem[arrow].setAttribute("class", "list-items");
-            console.log(arrow)
-            arrow--;
-            console.log(arrow)
-            listitem[arrow].setAttribute("class", "sel");
-            console.log(arrow);
+    console.log("len of row");
+    console.log(len);
 
+    console.log("value of row");
+    console.log(arrow);
+
+    if (event.which === 40) {
+       
+        if (arrow == null) {
+            listitem[0].setAttribute("class", "sel");
+            arrow = 0;
+            count = 0;
         }
         else {
-            arrow--;
-            document.getElementById("main").value = listitem[arrow].innerHTML;
-            document.getElementById("ulist").innerHTML = " ";
+
+            if (arrow != len) {
+                listitem[arrow].setAttribute("class", "list-items");
+
+                count++;
+                arrow++;
+            }
+            if (count > 4) {
+                document.getElementById("ulist").scrollBy(0, 180);
+                count = 0;
+            }
+            listitem[arrow].setAttribute("class", "sel");
 
         }
+        //if (listitem.length > 5) {
+        //    debugger;
+
+        //    document.getElementById("ulist").scrollBy(0, 20);
+        //}
 
     }
+    else if (event.which === 38) {
+        if (arrow != 0) {
+            listitem[arrow].setAttribute("class", "list-items");
+            arrow--;
+            countup--;
+        }
+        if (countup == 0) {
+            document.getElementById("ulist").scrollBy(0, -180);
+            countup = 5;
+        }
+
+
+        listitem[arrow].setAttribute("class", "sel");
+
+    }
+    else {
+
+        document.getElementById("main").value = listitem[arrow].innerHTML;
+        document.getElementById("ulist").innerHTML = " ";
+
+    }
+
+}
+
 
