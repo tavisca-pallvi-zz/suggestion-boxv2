@@ -5,16 +5,17 @@ function cleara() {
     document.getElementById("main").value = '';
     document.getElementById("cross").style.visibility = 'hidden';
 }
-var arrow = null;
+//var arrow = null;
+var arrow = 0;
 var count = null;
-var countup = null;
+var countup = 5;
 function search(event) {
     if (event.which === 38 || event.which === 40 || event.which === 13) {
         keyChange(event);
     }
     else {
-        arrow = null;
-        countup = null;
+        arrow = 0;
+        countup = 5;
         count = null;
         var ll = document.getElementById("main");
 
@@ -39,15 +40,20 @@ function search(event) {
 
             document.getElementById("ulist").style.overflowX = 'hidden';
             document.getElementById("ulist").style.overflowY = 'auto';
-
+            var c = 0;
             for (var i = 0; i < student.length; i++) {
                 elem = elem.toLowerCase();
                 student[i] = student[i].toLowerCase();
                 if (student[i].toLowerCase().includes(elem.toLowerCase())) {
+                  
+         
                     var li = document.createElement("LI");
                     li.setAttribute("class", "list-items");
                     var t = document.createTextNode(student[i]);
                     li.appendChild(t);
+                    if (i == 0)
+                        li.setAttribute("class", "sel");
+                    
                     document.getElementById("ulist").appendChild(li);
                     li.addEventListener("click", function () {
                         document.getElementById("main").value = this.innerHTML;
@@ -57,6 +63,7 @@ function search(event) {
 
                     f = 1;
                 }
+                //listitem[0].setAttribute("class", "sel");
             }
             if (f == 0) {
                 var list = document.getElementById("ulist");
@@ -78,7 +85,6 @@ function search(event) {
 }
 
 function keyChange(event) {
-    debugger;
   
     var listitem = document.getElementsByTagName("LI");//getting all the list tags
     var len = listitem.length - 1;
@@ -92,12 +98,12 @@ function keyChange(event) {
 
     if (event.which === 40) {
        
-        if (arrow == null) {
-            listitem[0].setAttribute("class", "sel");
-            arrow = 0;
-            count = 0;
-        }
-        else {
+        //if (arrow == null) {
+        //    listitem[0].setAttribute("class", "sel");
+        //    arrow = 0;
+        //    count = 0;
+        //}
+        //else {
 
             if (arrow != len) {
                 listitem[arrow].setAttribute("class", "list-items");
@@ -105,31 +111,33 @@ function keyChange(event) {
                 count++;
                 arrow++;
             }
-            if (count > 4) {
-                document.getElementById("ulist").scrollBy(0, 180);
-                count = 0;
+            if ((count) > 4) {
+                document.getElementById("ulist").scrollBy(0, 35);
+            //    count = 0;
             }
             listitem[arrow].setAttribute("class", "sel");
 
-        }
-        //if (listitem.length > 5) {
-        //    debugger;
-
-        //    document.getElementById("ulist").scrollBy(0, 20);
         //}
+        
 
     }
     else if (event.which === 38) {
         if (arrow != 0) {
             listitem[arrow].setAttribute("class", "list-items");
             arrow--;
+            console.log(countup);
             countup--;
         }
-        if (countup == 0) {
-            document.getElementById("ulist").scrollBy(0, -180);
-            countup = 5;
-        }
+        //if (countup == 0) {
+        //    debugger;
+        //    document.getElementById("ulist").scrollBy(0, -175);
+        //    countup = 5;
+        //}
+        if (listitem.length > 4) {
 
+
+            document.getElementById("ulist").scrollBy(0, -35);
+        }
 
         listitem[arrow].setAttribute("class", "sel");
 
