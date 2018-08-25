@@ -63,7 +63,7 @@ function search(event) {
 
                     f = 1;
                 }
-                //listitem[0].setAttribute("class", "sel");
+                
             }
             if (f == 0) {
                 var list = document.getElementById("ulist");
@@ -79,9 +79,7 @@ function search(event) {
         }
 
     }
-    //var lists = document.getelementsbytagname("li");
-    //lists[0].setattribute("class", "sel");
-    //arrow = 0;
+   
 }
 
 function keyChange(event) {
@@ -98,13 +96,7 @@ function keyChange(event) {
 
     if (event.which === 40) {
        
-        //if (arrow == null) {
-        //    listitem[0].setAttribute("class", "sel");
-        //    arrow = 0;
-        //    count = 0;
-        //}
-        //else {
-
+        
             if (arrow != len) {
                 listitem[arrow].setAttribute("class", "list-items");
 
@@ -117,7 +109,7 @@ function keyChange(event) {
             }
             listitem[arrow].setAttribute("class", "sel");
 
-        //}
+        
         
 
     }
@@ -128,11 +120,7 @@ function keyChange(event) {
             console.log(countup);
             countup--;
         }
-        //if (countup == 0) {
-        //    debugger;
-        //    document.getElementById("ulist").scrollBy(0, -175);
-        //    countup = 5;
-        //}
+       
         if (listitem.length > 4) {
 
 
